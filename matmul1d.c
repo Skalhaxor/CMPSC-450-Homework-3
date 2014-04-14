@@ -45,6 +45,7 @@ int main(int argc, char **argv) {
     
     // set id of next processor after the current (proc 0 and last one loop around)
     int nextProc = (rank+1) % num_tasks;
+    int prevProc = (rank+num_tasks-1) % num_tasks; //can't remember how % is defined on negatives, so add num_tasks for safety
 #else
     rank = 0;
     num_tasks = 1;
@@ -123,8 +124,6 @@ int main(int argc, char **argv) {
     /* Parallel matmul code goes here, see lecture slides for idea */
     /* The matrix C should be updated correctly */
     
-    fprintf(stderr, "here\n");
-    
     float*     tempB;   // the B received from the previous process; used so B
                         //   isn't overwritten in the receive communication
     MPI_Status status;  // status after an mpi communication
@@ -134,11 +133,24 @@ int main(int argc, char **argv) {
     assert(tempB != 0);
     
     for (int i = 0; i < num_tasks; ++i) {
-        // TODO: perform calculation here
         // C = C + AB
+        int aOffset = (i + rank) % num_tasks;
+        for(int j = 0; j < n_p; ++j) {
+        // for each row of C this proc deals with
+            for(int k = 0; k < n; ++k) {
+            // for each element in the row
+                int cIndex = j * n + k;
+                for(int m = 0; m < n_p; ++m) {
+                // for each row of B
+                    int aIndex = j * n + aOffset + m;
+                    int bIndex = m * n + k;
+                    C[cIndex] += A[aIndex] * B[bIndex];
+                }
+            }
+        }
         
         // send B to the next process, and will be receiving from the previous
-        MPI_Sendrecv(B,     n_p * n, MPI_FLOAT, rank,     SEND_B,
+        MPI_Sendrecv(B,     n_p * n, MPI_FLOAT, prevProc, SEND_B,
                      tempB, n_p * n, MPI_FLOAT, nextProc, SEND_B,
                                           MPI_COMM_WORLD, &status);
                                           
@@ -175,7 +187,7 @@ int main(int argc, char **argv) {
     int verify_failed = 0;
     for (i=0; i<n_p; i++) {
         for (j=0; j<n; j++) {
-            if (C[i*n+j] != ((rank+1)*n_p))
+            if (C[i*n+j] != ((rank+1)*n))
                 verify_failed = 1;
         }
     }
