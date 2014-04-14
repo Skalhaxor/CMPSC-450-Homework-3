@@ -16,8 +16,9 @@
 #include <mpi.h>
 #endif
 
+#define SEND_B 0   // tag for mpi communication of matrix B
+
 static double timer() {
-    
     struct timeval tp;
     gettimeofday(&tp, NULL);
     return ((double) (tp.tv_sec) + 1e-6 * tp.tv_usec);
@@ -33,7 +34,6 @@ static double timer() {
 }
 
 int main(int argc, char **argv) {
-
     int rank, num_tasks;
 
     /* Initialize MPI */
@@ -42,6 +42,9 @@ int main(int argc, char **argv) {
     MPI_Comm_size(MPI_COMM_WORLD, &num_tasks);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     // printf("Hello world from rank %3d of %3d\n", rank, num_tasks);
+    
+    // set id of next processor after the current (proc 0 and last one loop around)
+    int nextProc = (rank+1) % num_tasks;
 #else
     rank = 0;
     num_tasks = 1;
@@ -84,7 +87,7 @@ int main(int argc, char **argv) {
     assert(A != 0);
 
     B = (float *) malloc(n_p * n * sizeof(float));
-    assert(A != 0);
+    assert(B != 0);
     
     C = (float *) malloc(n_p * n * sizeof(float));
     assert(C != 0);
@@ -119,8 +122,35 @@ int main(int argc, char **argv) {
 #if USE_MPI
     /* Parallel matmul code goes here, see lecture slides for idea */
     /* The matrix C should be updated correctly */
-    if (rank == 0) 
-        fprintf(stderr, "Fill in code here\n");
+    
+    fprintf(stderr, "here\n");
+    
+    float*     tempB;   // the B received from the previous process; used so B
+                        //   isn't overwritten in the receive communication
+    MPI_Status status;  // status after an mpi communication
+    
+    // allocate tempB
+    tempB = (float *) malloc(n_p * n * sizeof(float));
+    assert(tempB != 0);
+    
+    for (int i = 0; i < num_tasks; ++i) {
+        // TODO: perform calculation here
+        // C = C + AB
+        
+        // send B to the next process, and will be receiving from the previous
+        MPI_Sendrecv(B,     n_p * n, MPI_FLOAT, rank,     SEND_B,
+                     tempB, n_p * n, MPI_FLOAT, nextProc, SEND_B,
+                                          MPI_COMM_WORLD, &status);
+                                          
+        MPI_Barrier(MPI_COMM_WORLD);
+        
+        // copy tempB back to B
+        for(int j = 0; j < n_p * n; j++) {
+            B[j] = tempB[j];
+        }
+    }
+    
+    free(tempB);
 
 #else
     int k;
