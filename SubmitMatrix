@@ -4,7 +4,7 @@
 #PBS -j oe
 
 cd $PBS_O_WORKDIR
-
+module load openmpi/gnu
 echo " "
 echo " "
 echo "Job started on `hostname` at `date`"
