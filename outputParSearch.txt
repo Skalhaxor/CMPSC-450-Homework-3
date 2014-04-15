@@ -1,0 +1,19 @@
+Processor 0 of 4: 20!
+Process 0 found a match at index 34
+Process 0 found a match at index 174
+Processor 1 of 4: 20!
+Process 1 found a match at index 284
+Process 1 found a match at index 372
+Process 1 found a match at index 402
+Process 1 found a match at index 404
+Process 1 found a match at index 436
+Processor 3 of 4: 20!
+Process 3 found a match at index 772
+Process 3 found a match at index 814
+Process 3 found a match at index 879
+Process 3 found a match at index 913
+Processor 2 of 4: 20!
+Process 2 found a match at index 580
+Process 2 found a match at index 602
+Process 2 found a match at index 712
+Process 2 found a match at index 749
