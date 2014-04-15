@@ -1,5 +1,5 @@
 #PBS -l nodes=1:ppn=16
-#PBS -l walltime=0:5:0
+#PBS -l walltime=0:2:0
 #PBS -l mem=1gb
 #PBS -j oe
 
@@ -16,5 +16,5 @@ for matrixDim in 16 256 1024 8192 ; do
 done
 echo " "
 echo " "
-echo "Jobe Ended at `date`"
+echo "Job Ended at `date`"
 echo " "
