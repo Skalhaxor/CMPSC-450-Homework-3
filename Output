@@ -1,0 +1,92 @@
+ 
+ 
+Job started on cyberstar229.hpc.rcc.psu.edu at Mon Apr 14 21:17:44 EDT 2014
+Matrix is 16 x 16 with 1 processors
+n: 16, n_p: 16
+Requires 0.003072 MB of memory per task
+Time taken: 0.004 s.
+Performance: 0.002 GFlop/s
+
+Matrix is 16 x 16 with 2 processors
+n: 16, n_p: 8
+Requires 0.001536 MB of memory per task
+Time taken: 0.000 s.
+Performance: 0.182 GFlop/s
+
+Matrix is 16 x 16 with 4 processors
+n: 16, n_p: 4
+Requires 0.000768 MB of memory per task
+Time taken: 0.000 s.
+Performance: 0.101 GFlop/s
+
+Matrix is 16 x 16 with 8 processors
+n: 16, n_p: 2
+Requires 0.000384 MB of memory per task
+Time taken: 0.191 s.
+Performance: 0.000 GFlop/s
+
+Matrix is 16 x 16 with 16 processors
+n: 16, n_p: 1
+Requires 0.000192 MB of memory per task
+Time taken: 0.173 s.
+Performance: 0.000 GFlop/s
+
+Matrix is 256 x 256 with 1 processors
+n: 256, n_p: 256
+Requires 0.786432 MB of memory per task
+Time taken: 0.351 s.
+Performance: 0.095 GFlop/s
+
+Matrix is 256 x 256 with 2 processors
+n: 256, n_p: 128
+Requires 0.393216 MB of memory per task
+Time taken: 0.152 s.
+Performance: 0.220 GFlop/s
+
+Matrix is 256 x 256 with 4 processors
+n: 256, n_p: 64
+Requires 0.196608 MB of memory per task
+Time taken: 0.077 s.
+Performance: 0.436 GFlop/s
+
+Matrix is 256 x 256 with 8 processors
+n: 256, n_p: 32
+Requires 0.098304 MB of memory per task
+Time taken: 0.040 s.
+Performance: 0.847 GFlop/s
+
+Matrix is 256 x 256 with 16 processors
+n: 256, n_p: 16
+Requires 0.049152 MB of memory per task
+Time taken: 0.182 s.
+Performance: 0.185 GFlop/s
+
+Matrix is 1024 x 1024 with 1 processors
+n: 1024, n_p: 1024
+Requires 12.582912 MB of memory per task
+Time taken: 26.065 s.
+Performance: 0.082 GFlop/s
+
+Matrix is 1024 x 1024 with 2 processors
+n: 1024, n_p: 512
+Requires 6.291456 MB of memory per task
+Time taken: 13.325 s.
+Performance: 0.161 GFlop/s
+
+Matrix is 1024 x 1024 with 4 processors
+n: 1024, n_p: 256
+Requires 3.145728 MB of memory per task
+Time taken: 7.149 s.
+Performance: 0.300 GFlop/s
+
+Matrix is 1024 x 1024 with 8 processors
+n: 1024, n_p: 128
+Requires 1.572864 MB of memory per task
+Time taken: 3.592 s.
+Performance: 0.598 GFlop/s
+
+Matrix is 1024 x 1024 with 16 processors
+n: 1024, n_p: 64
+Requires 0.786432 MB of memory per task
+Time taken: 2.631 s.
+Performance: 0.816 GFlop/s
