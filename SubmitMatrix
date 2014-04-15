@@ -1,0 +1,20 @@
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=0:5:0
+#PBS -l mem=1gb
+#PBS -j oe
+
+cd $PBS_O_WORKDIR
+
+echo " "
+echo " "
+echo "Job started on `hostname` at `date`"
+for matrixDim in 16 256 1024 8192 ; do
+   for numProcs in 1 2 4 8 16 ; do
+      echo "Matrix is $matrixDim x $matrixDim with $numProcs processors"
+      mpirun -n $numProcs a.out $matrixDim
+   done
+done
+echo " "
+echo " "
+echo "Jobe Ended at `date`"
+echo " "
